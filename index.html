@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Longest Common Subsequence (LCS) | Dynamic Programming Project</title>
+  <meta name="description" content="College project on Longest Common Subsequence (LCS) using Dynamic Programming by Sanket Sontakke, S.B. Jain Institute of Technology, Management & Research, Nagpur.">
+  <meta name="author" content="Sanket Sontakke (USN: CD24044)">
+  
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Glowing Background Elements -->
+  <div class="ambient-glow">
+    <div class="glow-orb-1"></div>
+    <div class="glow-orb-2"></div>
+    <div class="glow-orb-3"></div>
+  </div>
+  <div class="grid-bg-overlay"></div>
+
+  <!-- Sticky Navbar -->
+  <nav class="navbar" id="mainNavbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-brand">
+        <div class="brand-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">LCS Explorer</span>
+          <span class="brand-badge">DP Algorithm Project</span>
+        </div>
+      </a>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#hero" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About LCS</a></li>
+        <li><a href="#example" class="nav-link">Example</a></li>
+        <li><a href="#dp-approach" class="nav-link">DP Approach</a></li>
+        <li><a href="#solver" class="nav-link">LCS Solver</a></li>
+        <li><a href="#algorithm-works" class="nav-link">How it Works</a></li>
+        <li><a href="#applications" class="nav-link">Applications</a></li>
+        <li><a href="#conclusion" class="nav-link">Conclusion</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="btnPresentation" class="btn btn-secondary btn-sm" title="Toggle High-Contrast Viva Presentation Mode">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+          <span>Viva Mode</span>
+        </button>
+
+        <a href="#solver" class="nav-btn-solver">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span>Try Solver</span>
+        </a>
+
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       1. HERO SECTION
+       ========================================================================== -->
+  <section class="hero-section" id="hero">
+    <div class="container">
+      
+      <!-- College Banner Badge -->
+      <div class="college-badge-banner">
+        <div class="college-badge-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+          </svg>
+        </div>
+        <div class="college-badge-text">
+          <strong>S.B. Jain Institute of Technology, Management & Research, Nagpur</strong> — Dept. of CSE (Data Science)
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-subtitle-box">
+            Dynamic Programming Approach
+          </div>
+          
+          <h1 class="hero-main-title">
+            Longest Common <br>
+            <span class="gradient-text">Subsequence (LCS)</span>
+          </h1>
+
+          <p class="hero-description">
+            An advanced computer science algorithm that identifies the longest structural sequence common between two data sets while preserving relative positional order without demanding contiguous alignment.
+          </p>
+
+          <!-- Student & Academic Metadata -->
+          <div class="hero-meta-grid">
+            <div class="meta-item">
+              <div class="meta-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <div>
+                <span class="meta-label">Student</span>
+                <div class="meta-value">Sanket Sontakke</div>
+              </div>
+            </div>
+
+            <div class="meta-item">
+              <div class="meta-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                  <line x1="7" y1="8" x2="17" y2="8"></line>
+                  <line x1="7" y1="12" x2="13" y2="12"></line>
+                </svg>
+              </div>
+              <div>
+                <span class="meta-label">USN</span>
+                <div class="meta-value">CD24044</div>
+              </div>
+            </div>
+
+            <div class="meta-item">
+              <div class="meta-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              </div>
+              <div>
+                <span class="meta-label">Time Complexity</span>
+                <div class="meta-value">O(m × n)</div>
+              </div>
+            </div>
+
+            <div class="meta-item">
+              <div class="meta-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                </svg>
+              </div>
+              <div>
+                <span class="meta-label">Space Complexity</span>
+                <div class="meta-value">O(m × n) Tabulation</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#about" class="btn btn-primary">
+              <span>Explore LCS</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            
+            <a href="#solver" class="btn btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span>Try LCS Solver</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Animated Visual Comparison Card -->
+        <div class="hero-visual-card">
+          <div class="hero-visual-header">
+            <span class="live-indicator">
+              <span class="live-dot"></span>
+              Live Sequence Comparison
+            </span>
+            <span style="font-size:0.75rem; color:var(--text-dim); font-family:var(--font-mono);">Benchmark Pair</span>
+          </div>
+
+          <div class="demo-seq-row">
+            <div class="demo-seq-label">
+              <span>String A: "ABCBDAB"</span>
+              <span style="color:var(--cyan-muted);">Length 7</span>
+            </div>
+            <div class="char-strip">
+              <div class="char-box"><span>A</span><span class="char-idx">0</span></div>
+              <div class="char-box matched"><span>B</span><span class="char-idx">1</span></div>
+              <div class="char-box matched"><span>C</span><span class="char-idx">2</span></div>
+              <div class="char-box"><span>B</span><span class="char-idx">3</span></div>
+              <div class="char-box matched"><span>D</span><span class="char-idx">4</span></div>
+              <div class="char-box matched"><span>A</span><span class="char-idx">5</span></div>
+              <div class="char-box matched"><span>B</span><span class="char-idx">6</span></div>
+            </div>
+          </div>
+
+          <div class="demo-seq-row">
+            <div class="demo-seq-label">
+              <span>String B: "BDCABA"</span>
+              <span style="color:var(--cyan-muted);">Length 6</span>
+            </div>
+            <div class="char-strip">
+              <div class="char-box matched"><span>B</span><span class="char-idx">0</span></div>
+              <div class="char-box matched"><span>D</span><span class="char-idx">1</span></div>
+              <div class="char-box matched"><span>C</span><span class="char-idx">2</span></div>
+              <div class="char-box matched"><span>A</span><span class="char-idx">3</span></div>
+              <div class="char-box matched"><span>B</span><span class="char-idx">4</span></div>
+              <div class="char-box matched"><span>A</span><span class="char-idx">5</span></div>
+            </div>
+          </div>
+
+          <div class="hero-match-banner">
+            <div class="hero-match-title">Computed Longest Common Subsequence</div>
+            <div class="hero-match-val">BCBA</div>
+          </div>
+
+          <div class="hero-stats-row">
+            <div class="hero-stat-pill">
+              <span>LCS Length</span>
+              <strong>4</strong>
+            </div>
+            <div class="hero-stat-pill">
+              <span>Grid Size</span>
+              <strong>8 × 7</strong>
+            </div>
+            <div class="hero-stat-pill">
+              <span>DP Cells</span>
+              <strong>56</strong>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       2. ABOUT LCS SECTION
+       ========================================================================== */
+  -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Core Fundamentals</span>
+        <h2 class="section-title">Understanding the <span class="highlight">LCS Problem</span></h2>
+        <p class="section-subtitle">
+          Longest Common Subsequence lies at the heart of computational theory, formal language analysis, and genomic sequencing.
+        </p>
+      </div>
+
+      <!-- Core Poster Definition -->
+      <div class="about-hero-quote">
+        <p class="about-quote-text">
+          "The Longest Common Subsequence (LCS) is an important problem in Computer Science and Algorithms. It finds the longest sequence common between two given sequences without changing the original order of their elements."
+        </p>
+      </div>
+
+      <!-- 4 Conceptual Pillars -->
+      <div class="concept-pillars-grid">
+        <div class="glass-card pillar-card">
+          <div class="pillar-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="4" y1="9" x2="20" y2="9"></line>
+              <line x1="4" y1="15" x2="20" y2="15"></line>
+              <line x1="10" y1="3" x2="8" y2="21"></line>
+              <line x1="16" y1="3" x2="14" y2="21"></line>
+            </svg>
+          </div>
+          <div class="pillar-content">
+            <h3>What is a Subsequence?</h3>
+            <p>
+              A subsequence of a string is a new string generated by deleting zero or more elements from the original string, while strictly retaining the relative positional order of the remaining elements.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card pillar-card">
+          <div class="pillar-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+          </div>
+          <div class="pillar-content">
+            <h3>Subsequence vs. Substring</h3>
+            <p>
+              A <strong>substring</strong> demands unbroken, contiguous character adjacency (e.g., in "ALGORITHM", "RITH" is contiguous). A <strong>subsequence</strong> allows non-contiguous gaps (e.g., "AGRM" is a valid subsequence but NOT a substring).
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card pillar-card">
+          <div class="pillar-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 8 14"></polyline>
+            </svg>
+          </div>
+          <div class="pillar-content">
+            <h3>Why Order Matters</h3>
+            <p>
+              Elements cannot be rearranged or inverted. If character $x$ precedes $y$ in the source sequences, $x$ must strictly precede $y$ in the resulting common subsequence. The sequence "BCA" is invalid if "A" precedes "B" in the source.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card pillar-card">
+          <div class="pillar-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+            </svg>
+          </div>
+          <div class="pillar-content">
+            <h3>Non-Continuous Tolerance</h3>
+            <p>
+              Real-world mutations, text deletions, and data transmission packet drops insert arbitrary offsets. By allowing non-continuous intervals, LCS models true structural kinship across gaps.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Playground: Subsequence vs Substring -->
+      <div class="playground-box">
+        <div class="playground-header">
+          <div>
+            <h3 class="playground-title">Interactive Subsequence vs. Substring Playground</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Test any candidate against the parent string to inspect validity in real-time.</p>
+          </div>
+          <span class="section-tag" style="margin-bottom:0;">Live Evaluation</span>
+        </div>
+
+        <div class="playground-grid">
+          <div>
+            <div class="play-input-group" style="margin-bottom: 1.25rem;">
+              <label for="playParent">Parent Sequence (Haystack)</label>
+              <input type="text" id="playParent" class="play-input" value="ALGORITHM" maxlength="15">
+            </div>
+
+            <div class="play-input-group">
+              <label for="playCandidate">Candidate Sequence (Needle)</label>
+              <input type="text" id="playCandidate" class="play-input" value="AGRM" maxlength="15">
+            </div>
+
+            <div class="play-candidates-list">
+              <span style="font-size:0.75rem; color:var(--text-dim); margin-right:4px; align-self:center;">Try Presets:</span>
+              <button class="preset-chip" data-val="AGRM">"AGRM"</button>
+              <button class="preset-chip" data-val="RITH">"RITH"</button>
+              <button class="preset-chip" data-val="LGO">"LGO"</button>
+              <button class="preset-chip" data-val="MRO">"MRO" (Wrong Order)</button>
+              <button class="preset-chip" data-val="ALGORITHM">Full Match</button>
+            </div>
+          </div>
+
+          <div class="play-verdict-card">
+            <div class="verdict-row">
+              <span style="color:#ffffff; font-size:0.9rem; font-weight:600;">Is Valid Substring?</span>
+              <span id="substrVerdict" class="verdict-badge no">Checking...</span>
+            </div>
+            <div class="verdict-row">
+              <span style="color:#ffffff; font-size:0.9rem; font-weight:600;">Is Valid Subsequence?</span>
+              <span id="subseqVerdict" class="verdict-badge yes">Checking...</span>
+            </div>
+            <div style="margin-top:1.25rem;">
+              <span style="font-size:0.8rem; color:var(--text-dim); display:block; margin-bottom:0.5rem;">Visual Match Alignment in Parent:</span>
+              <div id="playVisualWrap" class="char-strip"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       3. LCS EXAMPLE SECTION
+       ========================================================================== -->
+  <section class="section" id="example">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Textbook Benchmark</span>
+        <h2 class="section-title">The Classic <span class="highlight">LCS Benchmark Example</span></h2>
+        <p class="section-subtitle">
+          Examine the canonical academic comparison pair referenced across algorithms curricula and the project poster.
+        </p>
+      </div>
+
+      <div class="glass-card example-card">
+        <div class="example-strings-showcase">
+          <!-- String A -->
+          <div class="example-str-box">
+            <div class="example-str-title">
+              <span>Sequence A</span>
+              <span>Length: 7</span>
+            </div>
+            <div class="example-letters-wrap">
+              <div class="letter-cell"><span>A</span><span class="sub-idx">0</span></div>
+              <div class="letter-cell highlight-match"><span>B</span><span class="sub-idx">1</span></div>
+              <div class="letter-cell highlight-match"><span>C</span><span class="sub-idx">2</span></div>
+              <div class="letter-cell"><span>B</span><span class="sub-idx">3</span></div>
+              <div class="letter-cell"><span>D</span><span class="sub-idx">4</span></div>
+              <div class="letter-cell"><span>A</span><span class="sub-idx">5</span></div>
+              <div class="letter-cell highlight-match"><span>B</span><span class="sub-idx">6</span></div>
+            </div>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.75rem;">
+              Canonical match positions in A: index 1 ('B'), index 2 ('C'), index 3 ('B') or 6, index 5 ('A').
+            </p>
+          </div>
+
+          <!-- String B -->
+          <div class="example-str-box">
+            <div class="example-str-title">
+              <span>Sequence B</span>
+              <span>Length: 6</span>
+            </div>
+            <div class="example-letters-wrap">
+              <div class="letter-cell highlight-match"><span>B</span><span class="sub-idx">0</span></div>
+              <div class="letter-cell"><span>D</span><span class="sub-idx">1</span></div>
+              <div class="letter-cell highlight-match"><span>C</span><span class="sub-idx">2</span></div>
+              <div class="letter-cell highlight-match"><span>A</span><span class="sub-idx">3</span></div>
+              <div class="letter-cell highlight-match"><span>B</span><span class="sub-idx">4</span></div>
+              <div class="letter-cell"><span>A</span><span class="sub-idx">5</span></div>
+            </div>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.75rem;">
+              Canonical match positions in B: index 0 ('B'), index 2 ('C'), index 4 ('B'), index 5 ('A').
+            </p>
+          </div>
+        </div>
+
+        <div class="example-result-banner">
+          <div class="result-info">
+            <h4>Computed Longest Common Subsequence</h4>
+            <div class="result-seq-display">BCBA</div>
+          </div>
+
+          <div class="result-badges-row">
+            <div class="result-badge-item">
+              <span>LCS Length</span>
+              <strong>4 Characters</strong>
+            </div>
+            <div class="result-badge-item">
+              <span>Equally Valid LCS</span>
+              <strong style="color:var(--text-main);">"BDAB", "BCAB"</strong>
+            </div>
+            <div class="result-badge-item">
+              <span>DP Verification</span>
+              <strong style="color:var(--emerald-primary);">Proven Optimal</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       4. DYNAMIC PROGRAMMING APPROACH
+       ========================================================================== -->
+  <section class="section" id="dp-approach">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Algorithmic Strategy</span>
+        <h2 class="section-title">The <span class="highlight">Dynamic Programming</span> Paradigm</h2>
+        <p class="section-subtitle">
+          How dynamic programming converts an intractable $O(2^n)$ exponential search into a deterministic $O(m \times n)$ polynomial-time solution.
+        </p>
+      </div>
+
+      <!-- 5 Key Pillars from the Project Poster -->
+      <div class="dp-steps-grid">
+        <div class="glass-card dp-card">
+          <span class="dp-card-num">01</span>
+          <h3>Divide into Subproblems</h3>
+          <p>
+            Break down the full problem comparing prefixes $X[1..i]$ and $Y[1..j]$. Each subproblem evaluates the optimal alignment of smaller prefixes.
+          </p>
+        </div>
+
+        <div class="glass-card dp-card">
+          <span class="dp-card-num">02</span>
+          <h3>Store Calculated Results</h3>
+          <p>
+            Allocate a 2D memory grid (Tabulation Table) of size $(m+1) \times (n+1)$ to memoize the solutions of all subproblems systematically.
+          </p>
+        </div>
+
+        <div class="glass-card dp-card">
+          <span class="dp-card-num">03</span>
+          <h3>Avoid Repeated Calculations</h3>
+          <p>
+            By looking up previously calculated values in constant time $O(1)$, identical overlapping subproblems are never recomputed redundantly.
+          </p>
+        </div>
+
+        <div class="glass-card dp-card">
+          <span class="dp-card-num">04</span>
+          <h3>Build the DP Table</h3>
+          <p>
+            Systematically fill cells row-by-row or column-by-column applying the optimal substructure recurrence relation until the matrix is full.
+          </p>
+        </div>
+
+        <div class="glass-card dp-card">
+          <span class="dp-card-num">05</span>
+          <h3>Trace Table Backwards</h3>
+          <p>
+            Begin from bottom-right cell $(m, n)$ and navigate backwards following the direction of choices to recover the exact matching characters.
+          </p>
+        </div>
+
+        <div class="glass-card dp-card" style="background:linear-gradient(135deg, rgba(6,182,212,0.1), rgba(59,130,246,0.1)); border-color:var(--border-bright);">
+          <span class="dp-card-num" style="color:var(--emerald-primary);">O(1)</span>
+          <h3>Optimal Substructure</h3>
+          <p>
+            An optimal solution to the global problem incorporates optimal solutions to related subproblems, guaranteeing global mathematical optimality.
+          </p>
+        </div>
+      </div>
+
+      <!-- Recurrence Formula Box -->
+      <div class="dp-math-formula-box">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <h3 style="font-size:1.25rem; font-weight:700; color:#ffffff;">The Core LCS Recurrence Relation</h3>
+          <span class="section-tag" style="margin-bottom:0;">Bellman Equation</span>
+        </div>
+
+        <div class="formula-display">
+<span class="comment">// Let L[i][j] denote the length of LCS of prefix X[1..i] and Y[1..j]:</span>
+
+<span class="keyword">If</span> i == 0 <span class="keyword">or</span> j == 0:
+    L[i][j] = <span class="val">0</span>                             <span class="comment">// Base case: empty string prefix has 0 matches</span>
+
+<span class="keyword">Else If</span> X[i - 1] == Y[j - 1]:
+    L[i][j] = <span class="val">1</span> + L[i - 1][j - 1]           <span class="comment">// Match: take diagonal value + 1 (↖)</span>
+
+<span class="keyword">Else</span>:
+    L[i][j] = <span class="func">max</span>(L[i - 1][j], L[i][j - 1])   <span class="comment">// Mismatch: take max of Top (↑) and Left (←)</span>
+        </div>
+
+        <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.7;">
+          This simple yet profound recursive formulation guarantees that every cell $L[i][j]$ is resolved solely using its three immediate adjacent neighbors: top-left diagonal, direct top, and direct left.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       5. INTERACTIVE LCS SOLVER
+       ========================================================================== -->
+  <section class="solver-section" id="solver">
+    <div class="container">
+      <div class="section-header center">
+        <span class="section-tag">Interactive Laboratory</span>
+        <h2 class="section-title">Interactive <span class="highlight">LCS Solver & Grid Visualizer</span></h2>
+        <p class="section-subtitle">
+          Enter custom sequences to dynamically generate the complete dynamic programming matrix, traceback navigation path, and character alignments.
+        </p>
+      </div>
+
+      <div class="solver-container-card">
+        <!-- Input Form -->
+        <div class="solver-controls-grid">
+          <div class="solver-input-group">
+            <div class="solver-input-label">
+              <span>First Sequence (String 1)</span>
+              <span id="counterSeq1" class="input-char-counter">7 chars</span>
+            </div>
+            <div class="input-wrap">
+              <input type="text" id="inputSeq1" class="solver-input" value="ABCBDAB" placeholder="e.g. ABCBDAB" maxlength="25">
+              <button class="input-clear-btn" id="clearSeq1" title="Clear First Sequence">✕</button>
+            </div>
+          </div>
+
+          <div class="solver-input-group">
+            <div class="solver-input-label">
+              <span>Second Sequence (String 2)</span>
+              <span id="counterSeq2" class="input-char-counter">6 chars</span>
+            </div>
+            <div class="input-wrap">
+              <input type="text" id="inputSeq2" class="solver-input" value="BDCABA" placeholder="e.g. BDCABA" maxlength="25">
+              <button class="input-clear-btn" id="clearSeq2" title="Clear Second Sequence">✕</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preset Sequences Quick Select -->
+        <div class="presets-bar">
+          <span class="presets-label">Quick Presets:</span>
+          <button class="preset-btn" data-s1="ABCBDAB" data-s2="BDCABA">🌟 Textbook ("ABCBDAB" / "BDCABA")</button>
+          <button class="preset-btn" data-s1="AGGTAB" data-s2="GXTXAYB">🧬 DNA ("AGGTAB" / "GXTXAYB")</button>
+          <button class="preset-btn" data-s1="DYNAMIC" data-s2="PROGRAMMING">💻 Algorithm ("DYNAMIC" / "PROGRAMMING")</button>
+          <button class="preset-btn" data-s1="HUMAN" data-s2="CHIMPANZEE">🔬 Bio ("HUMAN" / "CHIMPANZEE")</button>
+        </div>
+
+        <!-- Alert messages -->
+        <div id="solverAlert" class="alert-message alert-warning" style="display:none;"></div>
+
+        <!-- Primary Action Buttons -->
+        <div class="solver-actions-row">
+          <button id="btnFindLCS" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Find LCS</span>
+          </button>
+
+          <button id="btnStartWalkthrough" class="btn btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span>Step-by-Step Walkthrough</span>
+          </button>
+
+          <button id="btnClearAll" class="btn btn-secondary" style="border-color:rgba(244,63,94,0.3); color:#fb7185;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 6h18"></path>
+              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+            </svg>
+            <span>Clear</span>
+          </button>
+        </div>
+
+        <!-- Dynamic Results Container -->
+        <div id="solverResults" class="solver-results-card">
+          <!-- Summary Metrics Cards -->
+          <div class="results-metrics-grid">
+            <div class="metric-card">
+              <div class="metric-label">Longest Common Subsequence</div>
+              <div id="lcsResultStr" class="metric-val highlight-cyan">BCBA</div>
+              <button id="btnCopyLCS" class="btn-sm btn-secondary" style="margin-top:0.5rem; width:100%;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy LCS</span>
+              </button>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-label">LCS Length</div>
+              <div id="lcsResultLen" class="metric-val highlight-emerald">4</div>
+              <span style="font-size:0.75rem; color:var(--text-dim);">Matched Characters</span>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-label">DP Grid Dimensions</div>
+              <div id="lcsGridDim" class="metric-val">8 × 7</div>
+              <span style="font-size:0.75rem; color:var(--text-dim);">(m+1) × (n+1) States</span>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-label">Cell Calculations</div>
+              <div id="lcsOpsCount" class="metric-val">42 cells</div>
+              <span style="font-size:0.75rem; color:var(--text-dim);">O(m × n) Constant Steps</span>
+            </div>
+          </div>
+
+          <!-- Matching Character Sequence Alignment -->
+          <div class="alignment-visualizer">
+            <div class="alignment-title">
+              <span>Matching Characters Alignment Strip</span>
+              <span style="color:var(--emerald-primary); font-weight:600;">● Green = LCS Character</span>
+            </div>
+            <div style="margin-bottom:1rem;">
+              <span style="font-size:0.75rem; color:var(--text-muted); display:block; margin-bottom:0.4rem;">String 1 Alignment:</span>
+              <div id="alignSeq1" class="char-strip"></div>
+            </div>
+            <div>
+              <span style="font-size:0.75rem; color:var(--text-muted); display:block; margin-bottom:0.4rem;">String 2 Alignment:</span>
+              <div id="alignSeq2" class="char-strip"></div>
+            </div>
+          </div>
+
+          <!-- Interactive DP Table Visualizer -->
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
+              <h4 style="font-size:1.05rem; font-weight:700; color:#ffffff;">Dynamic Programming Matrix (Tabulation Grid)</h4>
+              <div style="display:flex; align-items:center; gap:0.75rem; font-size:0.75rem;">
+                <span style="color:#34d399;">● Highlighted Path = Backtrack Trace</span>
+                <span style="color:var(--cyan-muted);">↖ Match | ↑ Top | ← Left</span>
+              </div>
+            </div>
+
+            <div class="table-wrapper" id="dpTableWrapper">
+              <!-- Rendered via JS -->
+            </div>
+
+            <!-- Cell Details Hover Card -->
+            <div id="cellDetailsCard" class="glass-card" style="padding:1.25rem 1.5rem; margin-top:1rem; border-color:rgba(56,189,248,0.3);">
+              <span style="color:var(--text-muted); font-size:0.85rem;">Click any cell in the table above to inspect its subproblem formula and decision.</span>
+            </div>
+          </div>
+
+          <!-- Step-by-Step Playback Controller (Shown when requested) -->
+          <div id="walkthroughSection" style="display:none; margin-top:2rem;">
+            <div class="walkthrough-bar">
+              <div>
+                <span id="stepProgress" style="font-size:0.85rem; font-weight:700; color:var(--cyan-primary); font-family:var(--font-mono);">Step 1 of 42</span>
+              </div>
+
+              <div class="walkthrough-controls">
+                <button id="btnStepPrev" class="btn btn-secondary btn-sm" title="Previous Step">◄ Back</button>
+                <button id="btnPlayPause" class="btn btn-primary btn-sm" title="Play or Pause">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  <span>Play</span>
+                </button>
+                <button id="btnStepNext" class="btn btn-secondary btn-sm" title="Next Step">Next ►</button>
+                <button id="btnStepReset" class="btn btn-secondary btn-sm" title="Reset to Step 1">Reset</button>
+              </div>
+
+              <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.8rem; color:var(--text-muted);">
+                <span>Speed:</span>
+                <input type="range" id="speedSlider" min="150" max="1200" value="600" step="50" style="width:100px;">
+              </div>
+            </div>
+
+            <div id="stepNarrative" class="step-narrative-box">
+              Click Next or Play to observe each cell computation in real-time.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       6. HOW THE ALGORITHM WORKS
+       ========================================================================== -->
+  <section class="section" id="algorithm-works">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Step-by-Step Execution</span>
+        <h2 class="section-title">How the <span class="highlight">Algorithm Works</span></h2>
+        <p class="section-subtitle">
+          A systematic 6-step walkthrough of the dynamic programming procedure, from initial comparison to canonical LCS reconstruction.
+        </p>
+      </div>
+
+      <!-- 6 Sequential Steps from the Project Poster -->
+      <div class="algo-steps-timeline">
+        <div class="glass-card step-card">
+          <div class="step-num-badge">1</div>
+          <h3>Compare Characters</h3>
+          <p>
+            Iterate across each character pair $X[i-1]$ of the first sequence and $Y[j-1]$ of the second sequence for all $1 \le i \le m$ and $1 \le j \le n$.
+          </p>
+          <div class="step-visual-hint">Check: X[i - 1] == Y[j - 1] ?</div>
+        </div>
+
+        <div class="glass-card step-card">
+          <div class="step-num-badge">2</div>
+          <h3>Characters Match</h3>
+          <p>
+            If both characters are identical, add 1 to the previously solved subproblem located diagonally at $L[i-1][j-1]$.
+          </p>
+          <div class="step-visual-hint" style="color:#34d399;">L[i][j] = 1 + L[i - 1][j - 1] (↖)</div>
+        </div>
+
+        <div class="glass-card step-card">
+          <div class="step-num-badge">3</div>
+          <h3>Characters Do Not Match</h3>
+          <p>
+            If the characters differ, take the maximum value between the top neighbor $L[i-1][j]$ and left neighbor $L[i][j-1]$.
+          </p>
+          <div class="step-visual-hint" style="color:var(--cyan-muted);">L[i][j] = max(Top, Left) (↑/←)</div>
+        </div>
+
+        <div class="glass-card step-card">
+          <div class="step-num-badge">4</div>
+          <h3>Fill Complete DP Table</h3>
+          <p>
+            Repeat Steps 1–3 sequentially row-by-row until all $(m+1) \times (n+1)$ table entries are fully computed and populated.
+          </p>
+          <div class="step-visual-hint">Matrix State: L[m][n] = LCS Length</div>
+        </div>
+
+        <div class="glass-card step-card">
+          <div class="step-num-badge">5</div>
+          <h3>Trace Table Backwards</h3>
+          <p>
+            Initiate backtracking from cell $(m, n)$. When arriving at a diagonal match, capture that character; otherwise step toward the larger adjacent cell.
+          </p>
+          <div class="step-visual-hint">Backtrack: (m, n) ➔ (0, 0)</div>
+        </div>
+
+        <div class="glass-card step-card">
+          <div class="step-num-badge">6</div>
+          <h3>Obtain the Final LCS</h3>
+          <p>
+            Reverse the characters recorded during the traceback to produce the complete, canonical Longest Common Subsequence in correct sequential order.
+          </p>
+          <div class="step-visual-hint" style="color:var(--emerald-primary);">Result: Reversed Tracked Chars</div>
+        </div>
+      </div>
+
+      <!-- Polyglot Code Implementation -->
+      <div class="code-container">
+        <div class="code-header">
+          <div class="code-tab-buttons">
+            <button class="code-tab-btn active" data-lang="python">Python 3</button>
+            <button class="code-tab-btn" data-lang="cpp">C++ 20</button>
+            <button class="code-tab-btn" data-lang="javascript">JavaScript (ES6)</button>
+          </div>
+          <span style="font-size:0.75rem; color:var(--text-dim); font-family:var(--font-mono);">Algorithm Implementation</span>
+        </div>
+        <pre class="code-content"><code id="codeDisplay">def longest_common_subsequence(X: str, Y: str) -> str:
+    m, n = len(X), len(Y)
+    # Initialize DP table of size (m+1) x (n+1)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+
+    # Fill DP Table row by row
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if X[i - 1] == Y[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+
+    # Backtracking to reconstruct the canonical LCS string
+    lcs = []
+    i, j = m, n
+    while i > 0 and j > 0:
+        if X[i - 1] == Y[j - 1]:
+            lcs.append(X[i - 1])
+            i -= 1
+            j -= 1
+        elif dp[i - 1][j] >= dp[i][j - 1]:
+            i -= 1
+        else:
+            j -= 1
+
+    return "".join(reversed(lcs))
+
+# Example invocation:
+print(longest_common_subsequence("ABCBDAB", "BDCABA"))  # Output: BCBA</code></pre>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       7. APPLICATIONS SECTION
+       ========================================================================== -->
+  <section class="section" id="applications">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Industry & Science</span>
+        <h2 class="section-title">Real-World <span class="highlight">Applications of LCS</span></h2>
+        <p class="section-subtitle">
+          LCS is not merely a theoretical exercise; it powers critical infrastructure in modern software engineering, bioinformatics, and big data systems.
+        </p>
+      </div>
+
+      <div class="apps-grid">
+        <!-- 1. Text File Comparison -->
+        <div class="glass-card app-card">
+          <div class="app-icon-wrap">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          </div>
+          <h3>Text File Comparison</h3>
+          <p>
+            Underpins file comparison tools like Unix <code>diff</code> and <code>wdiff</code> to detect added, modified, and deleted lines between multiple text revisions.
+          </p>
+          <span class="app-tag">Diff Engines</span>
+        </div>
+
+        <!-- 2. Document Difference Detection -->
+        <div class="glass-card app-card">
+          <div class="app-icon-wrap">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+              <path d="m9 14 2 2 4-4"></path>
+            </svg>
+          </div>
+          <h3>Document Difference Detection</h3>
+          <p>
+            Crucial for academic plagiarism detection engines, digital contract review systems, and identifying stolen or duplicated passages across large document corpora.
+          </p>
+          <span class="app-tag">Plagiarism Detection</span>
+        </div>
+
+        <!-- 3. Data Similarity Checking -->
+        <div class="glass-card app-card">
+          <div class="app-icon-wrap">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+          </div>
+          <h3>Data Similarity Checking</h3>
+          <p>
+            Measures structural proximity and similarity scores in discrete time series, financial transaction streams, server logs, and user activity traces.
+          </p>
+          <span class="app-tag">Pattern Recognition</span>
+        </div>
+
+        <!-- 4. DNA Sequence Comparison -->
+        <div class="glass-card app-card">
+          <div class="app-icon-wrap">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
+            </svg>
+          </div>
+          <h3>DNA Sequence Comparison</h3>
+          <p>
+            Bioinformatics foundation for comparing nucleotide strands (A, C, G, T) to detect gene homology, evolutionary divergence, and disease-causing genomic mutations.
+          </p>
+          <span class="app-tag">Bioinformatics</span>
+        </div>
+
+        <!-- 5. Version Control Systems -->
+        <div class="glass-card app-card">
+          <div class="app-icon-wrap">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="6" y1="3" x2="6" y2="15"></line>
+              <circle cx="18" cy="6" r="3"></circle>
+              <circle cx="6" cy="18" r="3"></circle>
+              <path d="M18 9a9 9 0 0 1-9 9"></path>
+            </svg>
+          </div>
+          <h3>Version Control Systems</h3>
+          <p>
+            Powers Git and SVN three-way merges, branch synchronization, pull request diffs, and conflict resolution by identifying common ancestor snapshots.
+          </p>
+          <span class="app-tag">Git & VCS Merging</span>
+        </div>
+
+        <!-- 6. Source Code Comparison -->
+        <div class="glass-card app-card">
+          <div class="app-icon-wrap">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </div>
+          <h3>Source Code Comparison</h3>
+          <p>
+            Detects refactored functions, software clones, and tokenized syntax-tree changes in modern IDEs like VS Code, GitHub Desktop, and continuous integration pipelines.
+          </p>
+          <span class="app-tag">Code Analysis</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       8. ADVANTAGES & COMPLEXITY ANALYSIS
+       ========================================================================== -->
+  <section class="section" id="advantages">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Performance Evaluation</span>
+        <h2 class="section-title">Key <span class="highlight">Advantages of LCS</span></h2>
+        <p class="section-subtitle">
+          Why dynamic programming is the universally accepted standard for sequence comparison compared to naive brute-force combinatorial iteration.
+        </p>
+      </div>
+
+      <!-- Advantages from Poster -->
+      <div class="advantages-grid">
+        <div class="glass-card adv-card">
+          <div class="adv-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <div class="adv-content">
+            <h3>Avoids Repeated Calculations</h3>
+            <p>
+              By memoizing subproblem outcomes in a 2D matrix, calculations for identical subproblems are executed exactly once rather than thousands of times.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card adv-card">
+          <div class="adv-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+          </div>
+          <div class="adv-content">
+            <h3>Exponentially More Efficient than Brute Force</h3>
+            <p>
+              Reduces time complexity from an unmanageable exponential $O(2^{\min(m, n)})$ to a fast polynomial $O(m \times n)$, rendering comparisons tractable on large data.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card adv-card">
+          <div class="adv-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="3" y1="9" x2="21" y2="9"></line>
+              <line x1="9" y1="21" x2="9" y2="9"></line>
+            </svg>
+          </div>
+          <div class="adv-content">
+            <h3>Easy to Understand Using DP Table</h3>
+            <p>
+              The 2D tabulation grid provides an intuitive visual representation of state dependencies, optimal substructures, and deterministic backtracking.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card adv-card">
+          <div class="adv-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+            </svg>
+          </div>
+          <div class="adv-content">
+            <h3>Useful for Arbitrary Sequences</h3>
+            <p>
+              Works effortlessly across any ordered alphabet—from ASCII characters and source code tokens to genomic base pairs, audio phonemes, and numerical vectors.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Complexity Comparator -->
+      <div class="complexity-box">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h3 style="font-size:1.25rem; font-weight:700; color:#ffffff;">Interactive Complexity Comparator</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Slide sequence lengths to compare operations: Brute Force vs. Dynamic Programming.</p>
+          </div>
+          <span class="section-tag" style="margin-bottom:0;">O(2ⁿ) vs O(m×n)</span>
+        </div>
+
+        <div class="complexity-sliders-grid">
+          <div class="slider-group">
+            <label for="sliderM">
+              <span>Length of String 1 (m):</span>
+              <strong id="valM" style="color:var(--cyan-primary); font-family:var(--font-mono);">20</strong>
+            </label>
+            <input type="range" id="sliderM" min="5" max="30" value="20">
+          </div>
+
+          <div class="slider-group">
+            <label for="sliderN">
+              <span>Length of String 2 (n):</span>
+              <strong id="valN" style="color:var(--cyan-primary); font-family:var(--font-mono);">20</strong>
+            </label>
+            <input type="range" id="sliderN" min="5" max="30" value="20">
+          </div>
+        </div>
+
+        <div class="comparison-cards-row">
+          <div class="cmp-card brute">
+            <div class="cmp-title">Naive Brute Force Approach</div>
+            <div id="bruteOps" class="cmp-num">1,048,576 ops</div>
+            <div class="cmp-desc">
+              Complexity: $O(2^{\min(m, n)})$ — Explodes exponentially! Infeasible for sequence lengths above 30.
+            </div>
+          </div>
+
+          <div class="cmp-card dp">
+            <div class="cmp-title">Dynamic Programming Approach</div>
+            <div id="dpOps" class="cmp-num">400 ops</div>
+            <div class="cmp-desc">
+              Complexity: $O(m \times n)$ — Polynomial and lightning fast! Easily solves in microseconds.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       9. CONCLUSION & 10. FUTURE SCOPE
+       ========================================================================== -->
+  <section class="section" id="conclusion">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Project Summary</span>
+        <h2 class="section-title">Academic <span class="highlight">Conclusion</span></h2>
+        <p class="section-subtitle">
+          Final synthesis based strictly on the project poster and academic findings.
+        </p>
+      </div>
+
+      <!-- Formal Conclusion Card -->
+      <div class="conclusion-card">
+        <p class="conclusion-text">
+          The <strong>Longest Common Subsequence (LCS)</strong> represents a quintessential problem in computer science and algorithm design. By employing the <strong>Dynamic Programming approach</strong>, the problem systematically decomposes sequence alignment into manageable overlapping subproblems and memoizes optimal sub-solutions in a tabular matrix. This eliminates the combinatorial explosion inherent to brute-force recursion, transforming an exponential complexity problem into an efficient polynomial time solution of order <strong>$O(m \times n)$</strong>. LCS forms the mathematical bedrock of version control diffing, document revision tracking, and biological sequence comparison.
+        </p>
+      </div>
+
+      <!-- 10. FUTURE SCOPE -->
+      <div class="section-header" style="margin-top:2rem;">
+        <span class="section-tag">Research Frontiers</span>
+        <h2 class="section-title">Future <span class="highlight">Scope & Enhancements</span></h2>
+        <p class="section-subtitle">
+          Emerging research methodologies and optimizations to extend the practical boundaries of LCS.
+        </p>
+      </div>
+
+      <div class="future-scope-grid">
+        <div class="glass-card future-card">
+          <div class="future-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>
+              <path d="M12 12v9"></path>
+              <path d="m8 17 4 4 4-4"></path>
+            </svg>
+          </div>
+          <h3>Handling Very Large Sequences</h3>
+          <p>
+            Adapting LCS to whole-genome sequences spanning millions of base pairs using streaming algorithms and chunked distributed memory.
+          </p>
+        </div>
+
+        <div class="glass-card future-card">
+          <div class="future-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+              <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+              <line x1="6" y1="6" x2="6.01" y2="6"></line>
+              <line x1="6" y1="18" x2="6.01" y2="18"></line>
+            </svg>
+          </div>
+          <h3>Reducing Memory Usage</h3>
+          <p>
+            Deploying Hirschberg’s divide-and-conquer algorithm to achieve $O(\min(m, n))$ space complexity for reconstructing the exact LCS.
+          </p>
+        </div>
+
+        <div class="glass-card future-card">
+          <div class="future-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <h3>Developing Faster Methods</h3>
+          <p>
+            Utilizing bit-parallel algorithms (e.g. Myers' algorithm) and the "Method of Four Russians" for sub-quadratic $O(n^2 / \log n)$ execution.
+          </p>
+        </div>
+
+        <div class="glass-card future-card">
+          <div class="future-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+              <rect x="9" y="9" width="6" height="6"></rect>
+              <line x1="9" y1="1" x2="9" y2="4"></line>
+              <line x1="15" y1="1" x2="15" y2="4"></line>
+              <line x1="9" y1="20" x2="9" y2="23"></line>
+              <line x1="15" y1="20" x2="15" y2="23"></line>
+            </svg>
+          </div>
+          <h3>Combining with Modern Processing</h3>
+          <p>
+            Parallelizing matrix wave-front diagonals on multi-core GPUs via CUDA, and distributed cluster processing with Apache Spark.
+          </p>
+        </div>
+
+        <div class="glass-card future-card">
+          <div class="future-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20"></path>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <h3>Bioinformatics & DNA Alignments</h3>
+          <p>
+            Extending LCS to affine gap penalty models and substitution score matrices (PAM, BLOSUM) for global (Needleman-Wunsch) alignment.
+          </p>
+        </div>
+
+        <div class="glass-card future-card">
+          <div class="future-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+          </div>
+          <h3>Protein Sequence Comparison</h3>
+          <p>
+            Analyzing amino acid polypeptide chains to predict 3D protein folding conformations and discover conserved structural active sites.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       11. REFERENCES SECTION
+       ========================================================================== -->
+  <section class="section" id="references" style="padding-top:2rem;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Academic Citations</span>
+        <h2 class="section-title">References & <span class="highlight">Literature</span></h2>
+        <p class="section-subtitle">
+          Standard academic textbooks and algorithmic documentation referenced in this project.
+        </p>
+      </div>
+
+      <div class="refs-grid">
+        <div class="glass-card ref-card">
+          <div class="ref-book-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <div class="ref-info">
+            <h4>Introduction to Algorithms</h4>
+            <div class="ref-authors">Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein (CLRS)</div>
+            <div class="ref-note">MIT Press — Chapter 15: Dynamic Programming & Longest Common Subsequence</div>
+          </div>
+        </div>
+
+        <div class="glass-card ref-card">
+          <div class="ref-book-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <div class="ref-info">
+            <h4>Introduction to the Design and Analysis of Algorithms</h4>
+            <div class="ref-authors">Anany Levitin</div>
+            <div class="ref-note">Pearson Education — Dynamic Programming Principles & Table Construction</div>
+          </div>
+        </div>
+
+        <div class="glass-card ref-card">
+          <div class="ref-book-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <div class="ref-info">
+            <h4>Algorithm Design</h4>
+            <div class="ref-authors">Jon Kleinberg and Éva Tardos</div>
+            <div class="ref-note">Addison-Wesley — Sequence Alignment & Polynomial Time Reduction</div>
+          </div>
+        </div>
+
+        <div class="glass-card ref-card">
+          <div class="ref-book-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <div class="ref-info">
+            <h4>The Algorithm Design Manual</h4>
+            <div class="ref-authors">Steven S. Skiena</div>
+            <div class="ref-note">Springer — Practical Heuristics and Sequence Matching Applications</div>
+          </div>
+        </div>
+
+        <div class="glass-card ref-card">
+          <div class="ref-book-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+          </div>
+          <div class="ref-info">
+            <h4>W3Schools Programming Resources</h4>
+            <div class="ref-authors">W3Schools Algorithm & Data Structure Documentation</div>
+            <div class="ref-note">Online Educational References & Dynamic Programming Tutorials</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       12. FOOTER
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Project Identity -->
+        <div>
+          <div class="nav-brand" style="margin-bottom:1.25rem;">
+            <div class="brand-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </div>
+            <div class="brand-text">
+              <span class="brand-title">LCS Explorer</span>
+              <span class="brand-badge">Dynamic Programming</span>
+            </div>
+          </div>
+
+          <p class="footer-info-p">
+            Longest Common Subsequence | Dynamic Programming Approach.<br>
+            A high-performance educational project developed for academic presentation and algorithmic visualization.
+          </p>
+
+          <div class="academic-badge">
+            S.B. Jain Institute of Technology, Management & Research, Nagpur
+          </div>
+        </div>
+
+        <!-- Col 2: Navigation Links -->
+        <div>
+          <div class="footer-col-title">Navigation</div>
+          <ul class="footer-links-list">
+            <li><a href="#hero">Overview & Hero</a></li>
+            <li><a href="#about">About LCS Principles</a></li>
+            <li><a href="#example">Canonical Example</a></li>
+            <li><a href="#dp-approach">DP Formulation</a></li>
+            <li><a href="#solver">Interactive Solver</a></li>
+            <li><a href="#algorithm-works">Algorithm Steps</a></li>
+            <li><a href="#applications">Real-World Use Cases</a></li>
+            <li><a href="#conclusion">Conclusion & Scope</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Student Details & Credits -->
+        <div>
+          <div class="footer-col-title">Academic Credentials</div>
+          <div class="student-credit-box">
+            <div class="credit-row">
+              <span>Student:</span>
+              <strong>Sanket Sontakke</strong>
+            </div>
+            <div class="credit-row">
+              <span>USN:</span>
+              <strong>CD24044</strong>
+            </div>
+            <div class="credit-row">
+              <span>Department:</span>
+              <strong style="font-family:var(--font-sans); font-size:0.8rem; text-align:right;">CSE (Data Science)</strong>
+            </div>
+            <div class="credit-row" style="border-top:1px solid rgba(255,255,255,0.08); margin-top:0.4rem; padding-top:0.6rem;">
+              <span>Institution:</span>
+              <strong style="font-family:var(--font-sans); font-size:0.8rem; text-align:right;">SBJITMR, Nagpur</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 <strong>Sanket Sontakke</strong> | S.B. Jain Institute of Technology, Management & Research, Nagpur
+        </div>
+        <div style="display:flex; gap:1rem;">
+          <a href="#hero" style="color:var(--cyan-muted); text-decoration:none;">Back to Top ↑</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
